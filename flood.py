@@ -3,48 +3,53 @@ import board
 
 up, right, down, left = range(4) 
 
-def getup(row, col, colour):
-	return getscore(row, col, colour, up)
-def getright(row, col, colour):
-	return getscore(row, col, colour, right)
-def getdown(row, col, colour):
-	return getscore(row, col, colour, down)
-def getleft(row, col, colour):
-	return getscore(row, col, colour, left)
+def getup(row, col, colour, score):
+	return getscore(row, col, colour, score, up)
+def getright(row, col, colour, score):
+	return getscore(row, col, colour, score, right)
+def getdown(row, col, colour, score):
+	return getscore(row, col, colour, score, down)
+def getleft(row, col, colour, score):
+	return getscore(row, col, colour, score, left)
 
-def getscore(row, col, colour, direction):
-	score = 0
+def getscore(row, col, colour, score, direction):
+	print "pos: ",row,"/",col,"   direction: ",direction,"  score: ",score
+
+	# up
+	if direction != down and row > 0:
+		if b[row-1][col] == colour:
+			score = score + getup(row-1, col, colour, score)
+		else:
+			score= score + 1
 
 	# right
 	if direction != left and col < 24:
 		if b[row][col+1] == colour:
-			score = score + getright(row, col + 1, colour)
+			score = score + getright(row, col + 1, colour, score)
 		else:
 			score = score+ 1
+
+	print "pos: ",row,"/",col,"   direction: ",direction,"  score: ",score
+
+	# down
+	if direction != up and row < 24:
+		if b[row+1][col] == colour:
+			score = score + getdown(row+1, col, colour, score)
+		else:
+			score= score + 1
+
+	print "pos: ",row,"/",col,"   direction: ",direction,"  score: ",score
 
 	# left
 	if direction != right and col > 0:
 		if b[row][col-1] == colour:
-			score = score + getleft(row, col-1, colour)
+			score = score + getleft(row, col-1, colour, score)
 		else:
-			score= score + 1
+			score = score + 1
 
-	# up
-	if direction != down and row > 0:
-		if b[row+1][col] == colour:
-			score = score + getup(row+1, col, colour)
-		else:
-			score= score + 1
-
-	# down
-	if direction != up and col < 24:
-		if b[row-1][col] == colour:
-			score = score + getdown(row-1, col, colour)
-		else:
-			score= score + 1
+	print "pos: ",row,"/",col,"   direction: ",direction,"  score: ",score
 
 	print "score: ", score
-
 	return score
 
 
@@ -57,6 +62,6 @@ board.display(b)
 
 colour = b[0][0]
 
-getscore(0, 0, colour, 999)
+getscore(0, 0, colour, 0, 999)
 
 
