@@ -3,7 +3,6 @@ def display(board):
 		print
 		for j in range(25):
 				print board[i][j],
+	print
 
-def start(row, col):
-	print row, col
 
