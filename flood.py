@@ -12,6 +12,7 @@ def getdown(row, col, colour, score):
 def getleft(row, col, colour, score):
 	return getscore(row, col, colour, score, left)
 
+
 def getscore(row, col, colour, score, direction):
 	print "pos: ",row,"/",col,"   direction: ",direction,"  score: ",score
 
